@@ -1,53 +1,56 @@
-import { useState } from "react";
-import "@/app/Page/modal/modal.css";
-import { Button } from "@nextui-org/react";
-import "@/app/Page/modal/modal.css"
-const App = ({ showModal, setShowModal }: any) => {
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-  return (
-    <div className="modal">
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={toggleModal}>
-              &times;
-            </span>
-            <h2> Modes de retrait</h2>
-            <Button className="button">valider</Button>
-          </div>
-        </div>
-      )}
-      <style jsx>{`
-        .modal {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          width: 250%;
-          height: 250%;
-        }
+import store from "@/app/components/store";
+import { card } from "@/app/constants/constants";
+import { Card } from "@nextui-org/react";
+import React, { useState } from "react";
+import { useSnapshot } from "valtio";
+import Modal from "../modal/Modal";
 
-        .modal-content {
-          background-color: white;
-          padding: 20px;
-          border-radius: 5px;
-          width: 30%;
-          height: 70%;
-        }
-        .close {
-          float: none; 
-          cursor: pointer;
-          background-color: red;
-          width: 5%;
-          height: 5%;
-        }  
-      `}</style>
-    </div>
+function MenuCategorie() {
+  const [showModal, setShowModal] = useState(false);
+
+  const { id } = useSnapshot(store);
+  const categorieShop: any = Object.values(card.categories).filter(
+    (el: any) => el.shopid === id
   );
-};
 
-export default App; 
+  return (
+    <Card>
+      <div className="d-flex justify-content-between">
+        <div className="mt-2">
+          <ul style={{ backgroundColor: "#FFFFFF" }}>
+            {categorieShop.slice(0, 10).map((value: any, index: number) => (
+              <li key={index} onClick={() => setShowModal(true)}>
+                {value.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="d-flex align-items-center">
+          <select
+            className="max-w-xs nav-link mx-5"
+            onClick={() => setShowModal(true)}
+          >
+            {categorieShop
+              .slice(10, categorieShop.length)
+              .map((value: any, index: number) => (
+                <option key={index} value={value.title}>
+                  {value.title}
+                </option>
+              ))}
+          </select>
+          {showModal && (
+            <>
+              <div
+                className="modal-background"
+                onClick={() => setShowModal(false)}
+              />
+              <Modal setShowModal={setShowModal} showModal={showModal} />
+            </>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+export default MenuCategorie;
