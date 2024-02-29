@@ -26,7 +26,11 @@ function MenuCategorie() {
         <div className="mt-2">
           <ul style={{ backgroundColor: "#FFFFFF" }}>
             {categorieShop.slice(0, 10).map((value: any, index: number) => (
-              <li key={index} onClick={() => setShowModal(true)}>
+              <li
+                key={index}
+                onClick={() => setShowModal(true)}
+                style={{ cursor: "pointer" }} // Ajout du style pour le curseur
+              >
                 {value.title}
               </li>
             ))}
