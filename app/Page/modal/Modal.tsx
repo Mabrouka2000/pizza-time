@@ -94,19 +94,16 @@ const App = ({ showModal, setShowModal }: any) => {
           height: 70%;
         }
         .close {
-          float: none; 
+          float: none;
           cursor: pointer;
           background-color: red;
           width: 5%;
           height: 5%;
-          left:20%
-          
+          left: 20%;
         }
-        
-        
       `}</style>
     </div>
   );
 };
 
-export default App; 
+export default App;
