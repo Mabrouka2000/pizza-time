@@ -1,58 +1,65 @@
-'use client'
-import React from 'react'
-import { useState } from 'react'
-import { CiLogout } from 'react-icons/ci';
+"use client";
+import React from "react";
+import { useState } from "react";
+import { CiLogout } from "react-icons/ci";
 import { CgMail } from "react-icons/cg";
 import { RiLockPasswordFill } from "react-icons/ri";
-import './dropdown.css'
+import { CiShoppingCart } from "react-icons/ci";
+import { Login } from "@/app/Registarion/login";
 
 function DropDownMenu(): React.JSX.Element {
+  const [isActive, setIsActive] = useState(false);
 
-    const [isActive, setIsActive] = useState(false);
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
 
-    const handleClick = () => {
-      setIsActive(!isActive);
-    };
-  
   return (
-    <div className={`navigation${isActive ? " active" : ""}`}>
-    <div className="userBx">
-      <div className="imgBx">
-        <img src="/img/user2.jpg" alt="user" />
+    <nav className="navbar mt-4 mb-3 mx-5 position-absolute fixed-top ">
+      <div className="container-fluid">
+        <div></div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+          onClick={()=>{}}
+        >
+          <CiShoppingCart />
+        </button>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="offcanvas offcanvas-end"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <Login />
+          </div>
+        </div>
       </div>
-      <p className="username"></p>
-    </div>
-    <div className="menuToggle" onClick={handleClick}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul className="menu">
-      <li>
-        <p><CgMail /> E-mail
-        <input className='input' placeholder='Saisssez votre e-mail'></input>
-      </p></li>
-      <li>
-        <p><RiLockPasswordFill />  Mot de passe
-        <input className='input' placeholder='Saisssez votre mot de passe'></input>
-      </p></li>
-      <button>
-        Connexion
-    <div className="arrow-wrapper">
-        <div className="arrow"></div> 
-    </div>
-</button>
-    <div> <p className='text'>ou</p>
-    <a href=''>Inscription</a>
-    </div>
-      <li>
-        <a href="/"><CiLogout/> Logout</a>
-      </li>
-    </ul>
-  </div>
-);
+    </nav>
+  );
 }
 
-
-
-export default DropDownMenu 
+export default DropDownMenu;

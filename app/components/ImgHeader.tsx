@@ -4,13 +4,13 @@ import img11 from '../image/img11.jpg'
 
 function ImgHeader() {
   return (
-    <div className=''>
+    <div>
        
      <Image 
        src={img11}
        style={{
         width: '100%',
-        height: '15rem',
+        height: '200px',
       }}
        className="hidden md:block"
          alt="pizza"/> 
